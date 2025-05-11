@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Element Selectors ---
+    
     // Cache frequently accessed DOM elements for performance and easier access
     const tabButtons = document.querySelectorAll('.tab-button');
     const analyzerModes = document.querySelectorAll('.analyzer-mode');
