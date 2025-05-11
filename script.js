@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // Fetch analysis from backend
-                const response = await fetch('http://localhost:3000/api/analyze', {
+                const response = await fetch('https://murphyslawai-backend.onrender.com/api/analyze', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', },
                     body: JSON.stringify({ idea: idea, funMeter: funLevel }),
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // Fetch comparison from backend
-                const response = await fetch('http://localhost:3000/api/compare', {
+                const response = await fetch('https://murphyslawai-backend.onrender.com/api/compare', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', },
                     body: JSON.stringify({ idea1: idea1, idea2: idea2, funMeter: funLevel }),
@@ -687,7 +687,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 target.classList.add('loading-details'); 
                 target.disabled = true;
                 try {
-                    const response = await fetch('http://localhost:3000/api/flaw-detail', {
+                    const response = await fetch('https://murphyslawai-backend.onrender.com/api/flaw-detail', {
                         method: 'POST', 
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ 
