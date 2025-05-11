@@ -38,17 +38,29 @@ The source code for this project is available on GitHub:
 ## Project Structure
 
 murphys-law-ai/
+
 ├── .gitignore # Specifies intentionally untracked files that Git should ignore
+
 ├── backend/ # Node.js backend server and API logic
+
 │ ├── .env # Environment variables (GEMINI_API_KEY - NOT COMMITTED)
+
 │ ├── node_modules/ # Backend dependencies (NOT COMMITTED)
+
 │ ├── package.json # Lists backend dependencies and scripts
+
 │ ├── package-lock.json # Exact versions of backend dependencies
+
 │ ├── README.md # Backend-specific setup and information
+
 │ └── server.js # Main backend server file
+
 ├── index.html # Main HTML file for the frontend
+
 ├── README.md # This file - Overall project information
+
 ├── script.js # Frontend JavaScript for UI, API calls, and logic
+
 └── style.css # CSS styles for the frontend
 
 
