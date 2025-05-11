@@ -39,14 +39,14 @@
 
 1.  **Analyze Single Idea:**
     *   Go to the "Analyze Single Idea" tab.
-    *   Describe your AI idea in the textarea.
+    *   Describe your idea in the textarea.
     *   Adjust the "AI Personality" fun meter if desired.
     *   Click "Analyze Idea!".
     *   View the results in the accordion sections. Click on flaw items for more details and mitigations.
     *   Use the "Save to History", "Share Analysis", or "Export Report" buttons as needed.
 2.  **Compare Ideas:**
     *   Go to the "Compare Ideas" tab.
-    *   Enter two different AI ideas.
+    *   Enter two different ideas.
     *   Adjust the fun meter.
     *   Click "Compare Ideas!".
     *   View the comparative analysis.
