@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murphy's Law of AI - Advanced Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- We might add links to JS libraries here later, e.g., for PDF generation or charts -->
+</head>
+<body>
+
+    <header>
+        <h1>Murphy's Law of AI</h1>
+        <p>Uncover the hidden flaws, potential pitfalls, and surprising strengths of your ideas!</p>
+    </header>
+
+    <main>
+        <!-- Tab Navigation for different modes - e.g., Single Idea vs. Comparative -->
+        <nav id="mode-selector">
+            <button id="single-idea-tab" class="tab-button active">Analyze Single Idea</button>
+            <button id="compare-ideas-tab" class="tab-button">Compare Ideas</button>
+            <button id="history-tab" class="tab-button">View History</button>
+        </nav>
+
+        <!-- Section for Single Idea Analysis -->
+        <section id="single-idea-analyzer" class="analyzer-mode active">
+            <h2>Analyze a Single Idea</h2>
+            
+            <div id="idea-input-container">
+                <label for="idea-textarea">Describe your idea:</label>
+                <textarea id="idea-textarea" placeholder="e.g., An AI that writes personalized bedtime stories..."></textarea>
+                
+                <div class="controls-container">
+                    <label for="fun-meter">AI Personality (0=Objective, 100=Wild!):</label>
+                    <input type="range" id="fun-meter" name="fun-meter" min="0" max="100" value="50">
+                    <span id="fun-meter-value">50</span>
+                </div>
+                
+                <button id="submit-button">Analyze Idea!</button>
+            </div>
+
+            <div id="single-analysis-results">
+                <!-- Results for single idea analysis will go here -->
+            </div>
+        </section>
+
+        <!-- Section for Comparative Idea Analysis -->
+        <section id="comparative-analyzer" class="analyzer-mode" style="display: none;">
+            <h2>Compare Two Ideas</h2>
+            <div class="comparative-input-container">
+                <div class="idea-input-group">
+                    <label for="idea1-textarea">Idea 1:</label>
+                    <textarea id="idea1-textarea" placeholder="Describe your first idea..."></textarea>
+                </div>
+                <div class="idea-input-group">
+                    <label for="idea2-textarea">Idea 2:</label>
+                    <textarea id="idea2-textarea" placeholder="Describe your second idea..."></textarea>
+                </div>
+            </div>
+            <div class="controls-container">
+                 <label for="compare-fun-meter">AI Personality (0=Objective, 100=Wild!):</label>
+                 <input type="range" id="compare-fun-meter" name="compare-fun-meter" min="0" max="100" value="50">
+                 <span id="compare-fun-meter-value">50</span>
+            </div>
+            <button id="compare-submit-button">Compare Ideas!</button>
+
+            <div id="comparative-analysis-results">
+                <!-- Results for comparative analysis will go here -->
+            </div>
+        </section>
+
+
+        <!-- Section for History -->
+        <section id="history-viewer" class="analyzer-mode" style="display: none;">
+            <h2>Analysis History</h2>
+            <div id="history-list-container">
+                <p>Your saved analyses will appear here.</p>
+                <!-- History items will be populated by JavaScript -->
+            </div>
+            <button id="clear-history-button">Clear All History</button>
+        </section>
+
+        <!-- Common Results Display Area (Template, will be populated by JS) -->
+        <!-- This structure will be cloned and filled by JS for single or comparative results -->
+        <div id="results-template" style="display: none;">
+            <div class="results-header">
+                <h3 class="idea-title-placeholder">Analysis for: [Idea Title/Summary]</h3>
+                <div class="result-actions">
+                    <button class="share-button">Share Analysis</button>
+                    <button class="export-report-button">Export Report</button>
+                    <button class="save-history-button">Save to History</button> <!-- Only for single analysis initially -->
+                </div>
+            </div>
+
+            <div id="loading-indicator" class="loading" style="display: none;">Analyzing... Please wait.</div>
+            <div id="error-message" class="error-box" style="display: none;"></div>
+
+            <!-- Accordion Structure for Results -->
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">Idea Exploration & Context</button>
+                    <div class="accordion-content">
+                        <p class="exploration-output">-</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">Potential Pros / Strengths</button>
+                    <div class="accordion-content">
+                        <ul class="pros-output"><li>-</li></ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">Objective Flaws & Potential Pitfalls (Murphy's Law!)</button>
+                    <div class="accordion-content">
+                        <!-- Flaws will be listed here, potentially categorized -->
+                        <div class="flaws-container">
+                            <!-- Example of a categorized flaw (structure to be built by JS) -->
+                            <!-- 
+                            <h4>Category: Technical Feasibility</h4>
+                            <ul>
+                                <li class="flaw-item" data-flaw-id="1">
+                                    <span class="flaw-text">Flaw description...</span>
+                                    <span class="flaw-severity">Severity: High</span>
+                                    <button class="flaw-details-button">Details & Mitigation</button>
+                                    <div class="flaw-mitigation-details" style="display:none;">Mitigation details here...</div>
+                                </li>
+                            </ul> 
+                            -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">Mitigation Strategies</button>
+                    <div class="accordion-content">
+                        <ul class="mitigation-output"><li>-</li></ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">Overall Rating</button>
+                    <div class="accordion-content">
+                        <p class="rating-output">Rating: - / 10</p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End of results-template -->
+
+        
+
+    </main>
+
+    <footer>
+        <p>©Siddhant Singh Bisht - Murphy's Law of AI </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

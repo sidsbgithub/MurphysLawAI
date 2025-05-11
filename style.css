@@ -1,0 +1,794 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@300;400&family=Orbitron:wght@500;700&display=swap');
+
+/* ==========================================================================
+   CSS Variables -- For theming and easy maintenance
+   ========================================================================== */
+:root {
+    --primary-font: 'Poppins', sans-serif;
+    --tech-font: 'Roboto Mono', monospace; 
+    --title-font: 'Orbitron', sans-serif; 
+
+    --bg-color: #0a081b; 
+    --surface-color-L1: #1c163a; /* Main content background */
+    --surface-color-L2: #2a234f; /* Slightly lighter for interactive elements like accordions */
+    
+    --primary-accent: #00c6ff; /* Electric Blue */
+    --secondary-accent: #e000ff; /* Vibrant Magenta */
+    --tertiary-accent: #2bff88; /* Neon Green for success/positive feedback */
+
+    --text-color: #e8e8f0; /* Main text color */
+    --text-muted-color: #908ca5; /* For less prominent text */
+    --border-color: #3d366b; /* Borders and separators */
+
+    --shadow-color-primary: rgba(0, 198, 255, 0.2);
+    --shadow-color-secondary: rgba(224, 0, 255, 0.15);
+
+    --animation-speed-fast: 0.3s;
+    --animation-speed-medium: 0.5s;
+    --animation-speed-slow: 0.8s;
+}
+
+/* ==========================================================================
+   Keyframe Animations
+   ========================================================================== */
+@keyframes fadeIn { /* Simple fade-in effect */
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp { /* Fade in while sliding up */
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlowPrimary { /* Pulsating glow effect using primary accent */
+    0%, 100% { box-shadow: 0 0 5px var(--primary-accent), 0 0 10px var(--primary-accent), 0 0 15px var(--shadow-color-primary); }
+    50% { box-shadow: 0 0 10px var(--primary-accent), 0 0 20px var(--primary-accent), 0 0 30px var(--shadow-color-primary); }
+}
+
+@keyframes subtleShine { /* Sliding shine effect, often used on buttons */
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes spin { /* Basic spinning animation for loaders */
+    to { transform: rotate(360deg); } 
+}
+
+@keyframes twinkle { /* For starfield background effect */
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes moveBackground { /* For slow parallax movement of background elements */
+    0% { background-position: 0 0; }
+    100% { background-position: 200px 200px; }
+}
+
+/* ==========================================================================
+   General Page & Body Styles
+   ========================================================================== */
+body {
+    font-family: var(--primary-font);
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-color); 
+    /* Static starfield background layer */
+    background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="15" r="0.8" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="30" cy="5" r="0.6" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="55" cy="12" r="1.2" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="70" cy="25" r="0.7" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="90" cy="18" r="0.9" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="5" cy="35" r="0.5" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="25" cy="45" r="1" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="48" cy="38" r="0.7" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="65" cy="42" r="0.8" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="85" cy="30" r="1.1" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="15" cy="60" r="0.6" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="40" cy="55" r="1.3" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="60" cy="70" r="0.9" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="80" cy="65" r="0.5" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="95" cy="80" r="1" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="20" cy="85" r="1.1" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="75" cy="5" r="0.6" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="50" cy="90" r="0.8" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="5" cy="5" r="0.4" fill="rgba%28255%2C255%252C255%2C0.1%29" /%3E%3Ccircle cx="95" cy="95" r="1.3" fill="rgba%28255%2C255%2C255%2C0.25%29" /%3E%3Ccircle cx="25" cy="18" r="0.7" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="40" cy="98" r="0.9" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="70" cy="90" r="0.6" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="8" cy="48" r="0.5" fill="rgba%28255%2C255%2C255%2C0.1%29" /%3E%3Ccircle cx="15" cy="75" r="1.0" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="85" cy="45" r="0.7" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="45" cy="25" r="0.8" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="65" cy="85" r="1.1" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="92" cy="7" r="0.9" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="35" cy="65" r="0.6" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="50" cy="50" r="1.4" fill="rgba%28255%2C255%2C255%2C0.25%29" /%3E%3Ccircle cx="75" cy="75" r="0.7" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="20" cy="30" r="0.5" fill="rgba%28255%2C255%2C255%2C0.1%29" /%3E%3Ccircle cx="80" cy="20" r="1.0" fill="rgba%28255%2C255%2C255%2C0.2%29" /%3E%3Ccircle cx="30" cy="40" r="0.8" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3Ccircle cx="60" cy="10" r="0.6" fill="rgba%28255%2C255%2C255%2C0.1%29" /%3E%3Ccircle cx="10" cy="60" r="0.9" fill="rgba%28255%2C255%2C255%2C0.15%29" /%3E%3C/svg%3E');
+    background-size: 100px 100px; 
+    background-attachment: fixed;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure footer stays at bottom on short pages */
+    overflow-x: hidden; /* Prevent horizontal scrollbars */
+}
+
+/* Animated twinkling starfield overlay */
+body::before {
+    content: '';
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: -1; /* Place behind all content */
+    background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="0.8" fill="rgba%280%2C198%2C255%2C0.3%29" /%3E%3Ccircle cx="40" cy="20" r="1.0" fill="rgba%28224%2C0%2C255%2C0.3%29" /%3E%3Ccircle cx="70" cy="5" r="0.7" fill="rgba%280%2C198%2C255%2C0.3%29" /%3E%3Ccircle cx="90" cy="30" r="0.9" fill="rgba%28224%2C0%2C255%2C0.3%29" /%3E%3Ccircle cx="20" cy="50" r="1.2" fill="rgba%280%2C198%2C255%2C0.3%29" /%3E%3Ccircle cx="60" cy="40" r="0.8" fill="rgba%28224%2C0%2C255%2C0.3%29" /%3E%3Ccircle cx="80" cy="60" r="1.0" fill="rgba%280%2C198%2C255%2C0.3%29" /%3E%3Ccircle cx="30" cy="80" r="0.7" fill="rgba%28224%2C0%2C255%2C0.3%29" /%3E%3Ccircle cx="50" cy="95" r="0.9" fill="rgba%280%2C198%2C255%2C0.3%29" /%3E%3Ccircle cx="5" cy="70" r="1.2" fill="rgba%28224%2C0%2C255%2C0.3%29" /%3E%3C/svg%3E');
+    background-size: 200px 200px; 
+    animation: twinkle 8s infinite alternate, moveBackground 60s linear infinite;
+}
+
+/* Page Header */
+header {
+    background: linear-gradient(135deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+    color: #fff;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    position: relative; /* For pseudo-elements if any more are added */
+    overflow: hidden; /* Clip any overflowing decorative elements */
+    animation: fadeIn var(--animation-speed-slow) ease-out;
+}
+
+header h1 {
+    margin: 0;
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 3em; 
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3), 2px 2px 5px rgba(0,0,0,0.5);
+    animation: fadeInUp var(--animation-speed-slow) ease-out 0.2s backwards; /* 'backwards' applies start state before animation */
+}
+
+header p {
+    margin-top: 0.7rem;
+    font-size: 1.15em;
+    opacity: 0.9;
+    font-weight: 300;
+    animation: fadeInUp var(--animation-speed-slow) ease-out 0.4s backwards;
+}
+
+/* Main Content Area */
+main {
+    flex: 1; /* Allows main content to grow and push footer down */
+    padding: 25px;
+    max-width: 1000px; /* Max width for content readability */
+    margin: 40px auto; /* Centering the main content */
+    background-color: var(--surface-color-L1);
+    box-shadow: 0 0 30px var(--shadow-color-primary), 0 0 50px var(--shadow-color-secondary); /* Glow effect */
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    animation: fadeInUp var(--animation-speed-medium) ease-out 0.6s backwards;
+}
+
+/* ==========================================================================
+   Tab Navigation (#mode-selector)
+   ========================================================================== */
+#mode-selector {
+    display: flex;
+    margin-bottom: 35px;
+    border-bottom: 1px solid var(--border-color);
+    position: relative; /* For ::after pseudo-element positioning */
+}
+
+.tab-button {
+    padding: 15px 30px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-family: var(--title-font); 
+    font-weight: 500;
+    font-size: 1.1em;
+    color: var(--text-muted-color);
+    position: relative; /* For ::after pseudo-element */
+    transition: color var(--animation-speed-fast) ease;
+    letter-spacing: 1px;
+}
+
+.tab-button::after { /* Animated underline for active/hover states */
+    content: '';
+    position: absolute;
+    bottom: -1px; 
+    left: 50%; 
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+    transition: width var(--animation-speed-fast) ease, left var(--animation-speed-fast) ease;
+}
+
+.tab-button:hover { color: var(--primary-accent); }
+.tab-button:hover::after { width: 100%; left: 0; } /* Expand underline on hover */
+.tab-button.active { color: var(--primary-accent); }
+.tab-button.active::after { width: 100%; left: 0; } /* Full underline for active tab */
+
+/* Sections controlled by tabs */
+.analyzer-mode {
+    padding: 20px 0; /* Padding mainly handled by main, less here */
+    opacity: 0; /* Initial state for fade-in animation */
+    transform: translateY(10px); /* Initial state for slide-up animation */
+    transition: opacity var(--animation-speed-medium) ease, transform var(--animation-speed-medium) ease;
+    display: none; /* Hidden by default, JS toggles to block then active */
+}
+.analyzer-mode.active { /* Styles for the currently visible tab content */
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Input Elements (Labels, Textareas, Range Sliders)
+   ========================================================================== */
+label {
+    display: block;
+    margin-bottom: 12px;
+    font-family: var(--primary-font);
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0; 
+    animation: fadeInUp var(--animation-speed-medium) ease-out forwards; /* 'forwards' keeps end state of animation */
+}
+
+/* Staggered animation for labels */
+#single-idea-analyzer label:nth-of-type(1) { animation-delay: 0.7s; }
+#single-idea-analyzer label:nth-of-type(2) { animation-delay: 0.8s; }
+#comparative-analyzer .idea-input-group:nth-of-type(1) label { animation-delay: 0.7s; }
+#comparative-analyzer .idea-input-group:nth-of-type(2) label { animation-delay: 0.8s; }
+#comparative-analyzer .controls-container label { animation-delay: 0.9s; }
+
+textarea {
+    width: calc(100% - 28px); /* Full width minus padding & border */
+    min-height: 160px;
+    padding: 14px;
+    margin-bottom: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--bg-color); /* Darker than surface for contrast */
+    color: var(--text-color);
+    font-family: var(--tech-font); 
+    font-size: 1.05em;
+    resize: vertical; /* Allow user to resize vertically */
+    transition: border-color var(--animation-speed-fast), box-shadow var(--animation-speed-fast);
+    opacity: 0; animation: fadeInUp var(--animation-speed-medium) ease-out 0.9s forwards;
+}
+
+textarea:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 15px var(--shadow-color-primary); /* Glow on focus */
+    outline: none; /* Remove default browser outline */
+}
+
+input[type="range"] { /* Fun meter slider */
+    width: 70%;
+    margin-right: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+    accent-color: var(--primary-accent); /* Styles the track and thumb in modern browsers */
+    opacity: 0; animation: fadeInUp var(--animation-speed-medium) ease-out 1s forwards;
+}
+
+#fun-meter-value, #compare-fun-meter-value { /* Span displaying slider value */
+    font-family: var(--title-font);
+    font-weight: 700;
+    color: var(--primary-accent);
+    font-size: 1.2em;
+    display: inline-block;
+    min-width: 30px; /* Prevent layout shift as number changes */
+    text-align: right;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+button {
+    font-family: var(--title-font); 
+    font-weight: 700;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    font-size: 1.05em;
+    transition: all var(--animation-speed-fast) ease;
+    letter-spacing: 1px;
+    position: relative; /* For shine pseudo-element */
+    overflow: hidden; 
+    z-index: 1; /* Ensure button content is above shine */
+    opacity: 0; animation: fadeInUp var(--animation-speed-medium) ease-out 1.1s forwards;
+    margin-top: 10px; /* Default top margin for buttons */
+}
+
+button .export-report-button{
+    margin-top: 10px;
+}
+
+/* Shine effect on button hover */
+button::before { 
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%; /* Start off-screen */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left var(--animation-speed-medium) ease-in-out;
+    z-index: -1; /* Behind button text */
+}
+button:hover::before { left: 100%; } /* Slide shine across on hover */
+
+/* Primary action buttons (Analyze, Compare) */
+button#submit-button, button#compare-submit-button {
+    background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+    color: #fff; 
+    box-shadow: 0 5px 15px var(--shadow-color-primary), 0 5px 10px var(--shadow-color-secondary);
+}
+button#submit-button:hover, button#compare-submit-button:hover {
+    transform: translateY(-3px) scale(1.03); /* Slight lift and scale */
+    box-shadow: 0 8px 20px var(--shadow-color-primary), 0 8px 15px var(--shadow-color-secondary);
+}
+
+/* Clear History button */
+#clear-history-button {
+    background-color: var(--secondary-accent); /* Using secondary accent for a "warning" feel */
+    color: #fff;
+}
+#clear-history-button:hover {
+    background-color: color-mix(in srgb, var(--secondary-accent) 80%, black); /* Darken on hover */
+    transform: translateY(-2px);
+}
+
+/* Action buttons within results (Share, Export, Save) */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.results-header h3.idea-title-placeholder {
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 1.8em; 
+    color: var(--primary-accent);
+    letter-spacing: 1px;
+}
+.result-actions button { /* Specific styling for these smaller action buttons */
+    animation: none; opacity: 1; /* Override initial fade-in as they are dynamically added */
+    margin-left: 5px;
+    margin-top: 5px; /* Reset default top margin for inline buttons */
+    padding: 10px 22px;
+    font-size: 0.95em;
+}
+.result-actions .share-button { background: var(--primary-accent); color: var(--bg-color); }
+.result-actions .export-report-button { background: var(--secondary-accent); color: #fff; }
+.result-actions .save-history-button { background: var(--tertiary-accent); color: var(--bg-color); }
+
+/* ==========================================================================
+   Feedback Messages (Loading, Error)
+   ========================================================================== */
+.loading {
+    text-align: center;
+    font-family: var(--tech-font);
+    color: var(--text-muted-color);
+    padding: 50px 20px;
+    background-color: var(--surface-color-L2);
+    border-radius: 10px;
+    margin: 30px 0;
+    font-size: 1.3em;
+    border: 1px dashed var(--border-color);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+.loading::before { /* Spinner element */
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    border: 4px solid var(--text-muted-color);
+    border-top-color: var(--primary-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.error-box {
+    background-color: color-mix(in srgb, var(--secondary-accent) 20%, var(--surface-color-L1)); /* Tinted background */
+    color: var(--secondary-accent); /* Error text color */
+    padding: 25px;
+    border: 1px solid var(--secondary-accent);
+    border-left: 5px solid var(--secondary-accent); /* Prominent left border */
+    border-radius: 10px;
+    margin: 30px 0;
+    font-weight: 500;
+    font-family: var(--primary-font);
+}
+
+/* ==========================================================================
+   Accordion Styles (For Single Idea Analysis Results)
+   ========================================================================== */
+.accordion {
+    border-radius: 10px;
+    overflow: hidden; /* Ensures border-radius clips child content */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.accordion-item {
+    background-color: var(--surface-color-L2);
+    border-bottom: 1px solid var(--border-color);
+}
+.accordion-item:last-child { border-bottom: none; } /* Remove border from last item */
+.accordion-item.revealed { /* For JS-triggered staggered animation */
+    animation: fadeInUp var(--animation-speed-medium) ease-out forwards;
+}
+
+.accordion-header {
+    width: 100%;
+    background-color: transparent; /* Inherits from .accordion-item */
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 20px 30px;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: background-color var(--animation-speed-fast) ease, color var(--animation-speed-fast) ease;
+    font-family: var(--title-font); 
+    font-size: 1.25em;
+    letter-spacing: 0.5px;
+}
+
+.accordion-header:hover { background-color: rgba(255,255,255,0.03); } /* Subtle hover */
+.accordion-header.active { /* Style for open accordion header */
+    background: linear-gradient(90deg, var(--primary-accent) -50%, var(--surface-color-L2) 50%);
+    color: #fff;
+}
+
+.accordion-header::after { /* Expander icon (e.g., arrow) */
+    content: '▶'; 
+    font-size: 0.7em;
+    color: var(--text-muted-color);
+    float: right;
+    transition: transform var(--animation-speed-fast) ease, color var(--animation-speed-fast) ease;
+    margin-top: 4px; 
+}
+.accordion-header.active::after { /* Rotated icon for open state */
+    transform: rotate(90deg);
+    color: #fff;
+}
+
+.accordion-content {
+    padding: 0px 30px 0px 30px; /* Initial padding, JS might adjust top/bottom for animation */
+    background-color: transparent;
+    display: none; /* Hidden by default, JS toggles */
+    overflow: hidden; /* Crucial for max-height animation */
+    font-size: 1em;
+    color: var(--text-muted-color);
+    border-top: 1px solid var(--border-color); 
+    max-height: 0; /* Initial state for collapse animation */
+    transition: max-height var(--animation-speed-medium) ease-in-out, 
+                padding-top var(--animation-speed-medium) ease-in-out, 
+                padding-bottom var(--animation-speed-medium) ease-in-out;
+}
+.accordion-header.active + .accordion-content { /* When header is active, content gets padding */
+    padding-top: 20px;
+    padding-bottom: 25px;
+    /* max-height is set by JS to content's scrollHeight */
+}
+
+/* List styling within accordion content */
+.accordion-content ul {
+    list-style-type: none; /* Remove default bullets, we use ::before */
+    padding-left: 0;
+}
+.accordion-content ul li {
+    margin-bottom: 15px; 
+    padding-left: 25px; 
+    position: relative; /* For ::before pseudo-element positioning */
+}
+.accordion-content ul li::before { /* Custom bullet */
+    content: '»'; 
+    position: absolute;
+    left: 0;
+    top: 2px; 
+    color: var(--primary-accent);
+    font-size: 1.4em;
+    line-height: 1;
+}
+
+/* Generic Title/Description Styles for items in Pros, Mitigations, etc. */
+.accordion-content ul li .item-title, 
+.exploration-output .item-title { /* Also for exploration title if structured similarly */
+    display: block;
+    font-family: var(--title-font);
+    font-weight: 600;
+    font-size: 1.05em;
+    color: var(--text-color);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
+.exploration-output .item-title { /* Specific emphasis for exploration title */
+    font-size: 1.1em;
+    color: var(--primary-accent);
+    margin-bottom: 10px;
+}
+.accordion-content ul li .item-description, 
+.exploration-output .item-description, /* If exploration uses a <p> for description */
+.exploration-output > span { /* If exploration description is a direct child <span> */
+    font-family: var(--primary-font);
+    font-size: 0.95em;
+    color: var(--text-muted-color);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+.accordion-content ul li .item-description {
+    padding-left: 10px; /* Indent description slightly under its title in lists */
+}
+.exploration-output > span { 
+    display: inline; /* Allow it to flow after a <strong> title */
+}
+.exploration-output p { /* General paragraph styling within exploration */
+    margin-bottom: 0.5em;
+}
+
+
+/* ==========================================================================
+   Flaw Item Styles (Within Objective Flaws Accordion)
+   ========================================================================== */
+.flaws-container h4 { /* Category titles for flaws */
+    font-family: var(--title-font);
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 18px;
+    color: var(--secondary-accent);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    font-size: 1.2em;
+    letter-spacing: 0.5px;
+}
+
+.flaw-item { /* Container for a single flaw */
+    background-color: var(--surface-color-L1); /* Slightly different from accordion item bg for depth */
+    border: 1px solid var(--border-color);
+    padding: 18px 22px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    transition: transform var(--animation-speed-fast) ease, box-shadow var(--animation-speed-fast) ease;
+    position: relative;
+}
+.flaw-item:hover {
+    transform: translateY(-4px) scale(1.01); /* Lift effect on hover */
+    box-shadow: 0 0 15px var(--shadow-color-primary);
+    border-color: var(--primary-accent);
+}
+
+.flaw-item .flaw-title { /* Title of the flaw */
+    display: block; 
+    font-family: var(--title-font); 
+    font-weight: 600; 
+    font-size: 1.1em;  
+    color: var(--text-color); 
+    margin-bottom: 8px; 
+    letter-spacing: 0.5px;
+}
+
+.flaw-item .flaw-description { /* Description of the flaw */
+    font-family: var(--primary-font); 
+    font-size: 0.95em; 
+    color: var(--text-muted-color); 
+    margin-bottom: 12px; 
+    line-height: 1.6; 
+}
+
+.flaw-item .flaw-severity { /* Severity badge */
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 0.9em;
+    padding: 6px 15px;
+    border-radius: 20px; /* Pill shape */
+    display: inline-block;
+    margin-top: 8px; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+/* Severity badge colors */
+.severity-low { background: var(--tertiary-accent); color: var(--bg-color); }
+.severity-medium { background: var(--primary-accent); color: var(--bg-color); }
+.severity-high { background: var(--secondary-accent); color: #fff; }
+
+/* Button for flaw details */
+.flaw-item .flaw-details-button {
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: 0.85em;
+    padding: 6px 12px;
+    background-color: var(--text-muted-color); 
+    color: var(--bg-color);
+    border: none;
+    border-radius: 15px;
+    margin-top: 10px; /* Reset from general button style if needed */
+    cursor: pointer;
+    transition: background-color var(--animation-speed-fast), transform var(--animation-speed-fast);
+}
+.flaw-item .flaw-details-button:hover {
+    background-color: var(--primary-accent);
+    transform: translateY(-1px);
+}
+.flaw-item .flaw-details-button.loading-details { /* Style for button when loading details */
+    opacity: 0.7;
+}
+/* .flaw-item .flaw-details-button.loading-details::after { Spinner is now a separate div } */
+
+/* Container for fetched flaw details and mitigations */
+.flaw-item .flaw-mitigation-details {
+    background-color: rgba(0,0,0,0.15); /* Darker inset background */
+    border: 1px solid var(--border-color);
+    padding: 0; /* Initial padding for collapse animation */
+    margin-top: 0; /* Initial margin for collapse animation */
+    border-radius: 6px;
+    font-size: 0.9em; 
+    color: var(--text-muted-color);
+    line-height: 1.6;
+    display: none; /* Hidden by default */
+    max-height: 0; /* For collapse animation */
+    overflow: hidden; /* For collapse animation and if content has fixed height */
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, margin-top 0.4s ease-in-out;
+}
+.flaw-item .flaw-mitigation-details.visible { /* Class added by JS to show */
+    display: block; 
+    padding: 15px; 
+    margin-top: 12px;
+    overflow-y: auto; /* Allow scrolling within this box if its content is very long */
+    /* max-height is set by JS to its scrollHeight for expansion */
+}
+
+/* Mini spinner for loading flaw details */
+.flaw-mitigation-details .mini-spinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--text-muted-color);
+    border-top-color: var(--primary-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+    vertical-align: text-bottom;
+}
+.flaw-mitigation-details .error-text { /* For error messages within details box */
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+/* Styling for content within the flaw details box */
+.flaw-mitigation-details h5 { /* Sub-headings like "In-Depth Explanation" */
+    font-family: var(--title-font);
+    color: var(--primary-accent);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 5px;
+}
+.flaw-mitigation-details ul { /* Lists for mitigation strategies */
+    list-style-type: disc; /* Standard bullets for these sub-lists */
+    padding-left: 20px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+.flaw-mitigation-details ul li {
+    margin-bottom: 8px;
+    padding-left: 0; /* Reset main accordion list style */
+}
+.flaw-mitigation-details ul li::before { /* Remove custom '»' bullet */
+    content: none;
+}
+.flaw-mitigation-details p { /* Paragraphs within details box */
+    margin-bottom: 10px;
+}
+
+
+/* ==========================================================================
+   History Section Styles
+   ========================================================================== */
+#history-list-container {
+    max-height: 480px; /* Limit height and allow scroll */
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--surface-color-L2);
+}
+.history-item { /* Individual saved analysis item */
+    padding: 18px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color var(--animation-speed-fast) ease, transform var(--animation-speed-fast) ease;
+    position: relative;
+}
+.history-item:last-child { border-bottom: none; }
+.history-item:hover {
+    background-color: color-mix(in srgb, var(--primary-accent) 10%, var(--surface-color-L2));
+    transform: translateX(5px); /* Slight shift on hover */
+}
+.history-item-title {
+    font-family: var(--title-font);
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1em;
+}
+.history-item-date {
+    font-size: 0.85em;
+    color: var(--text-muted-color);
+    display: block;
+    margin-top: 5px;
+    font-family: var(--tech-font);
+}
+
+/* ==========================================================================
+   Comparative Analysis Output Styles
+   ========================================================================== */
+.comparison-output-content { /* Container for the comparison text */
+    padding: 20px;
+    background-color: var(--surface-color-L2); 
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-top: 20px;
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    line-height: 1.7;
+}
+/* Headings within comparison output */
+.comparison-output-content h2 {
+    font-family: var(--title-font);
+    color: var(--primary-accent);
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    font-size: 1.5em;
+}
+.comparison-output-content h3 {
+    font-family: var(--title-font);
+    color: var(--secondary-accent);
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+.comparison-output-content p {
+    margin-bottom: 1em;
+}
+.comparison-output-content strong { /* For bolded text from Markdown */
+    font-weight: 600;
+    color: var(--text-color); 
+}
+/* Lists within comparison output */
+.comparison-output-content ul {
+    list-style-type: disc; 
+    padding-left: 25px;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+.comparison-output-content ul li {
+    margin-bottom: 0.5em;
+    padding-left: 0; /* Reset from accordion list style */
+}
+.comparison-output-content ul li::before { /* Remove custom '»' bullet */
+    content: none;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--bg-color); 
+    color: var(--text-muted-color);
+    margin-top: auto; /* Pushes footer to bottom if page content is short */
+    font-size: 0.9em;
+    border-top: 1px solid var(--border-color);
+    animation: fadeIn var(--animation-speed-slow) ease-out 1.2s backwards;
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+.hidden { display: none !important; } /* For JS to forcibly hide elements */
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+@media (max-width: 768px) {
+    header h1 { font-size: 2.4em; }
+    main { margin: 20px 10px; padding: 20px; }
+    .tab-button { padding: 12px 18px; font-size: 1em; }
+    .results-header { flex-direction: column; align-items: flex-start; }
+    .results-header h3.idea-title-placeholder { margin-bottom: 15px; font-size: 1.5em;}
+    .result-actions { width: 100%; text-align: left; /* Align buttons left on mobile */ }
+    .result-actions button { margin: 8px 0; margin-left:0; display: block; width: 100%; }
+    .accordion-header { padding: 15px 20px; font-size: 1.15em;}
+    .accordion-content { padding: 0 20px 20px 20px; } /* Adjust padding for mobile */
+    .comparison-output-content h2 { font-size: 1.3em; }
+    .comparison-output-content h3 { font-size: 1.15em; }
+}
